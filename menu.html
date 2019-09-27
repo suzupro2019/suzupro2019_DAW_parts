@@ -1,0 +1,222 @@
+<!DOCTYPE html　"-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title></title>
+  <style type="text/css" media="screen">
+  /*menuテーブル*/
+  table td {
+    width:150px;
+    height:80px;
+    text-align:center;
+    vertical-align:middle;
+    background-color:#595757;
+    user-select: none; /* CSS3 */
+    -moz-user-select: none; /* Firefox */
+    -webkit-user-select: none; /* Safari、Chromeなど */
+    -ms-user-select: none; /* IE10かららしい */
+  }
+  td.artist{
+    width:230px;
+    height:70px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  td.bar{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  /*saveボタン*/
+  .save-button{
+    margin: -15px 0 30px 0;
+    padding: 10;
+
+  }
+  .save-button #save{
+    padding: 10px;
+    background: #ECCCCC;
+    border: none;
+    color: #595757;
+    width:50px;
+    height:30px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    user-select: none; /* CSS3 */
+    -moz-user-select: none; /* Firefox */
+    -webkit-user-select: none; /* Safari、Chromeなど */
+    -ms-user-select: none; /* IE10かららしい <input type="number" name="bpm">bpm */
+  }
+
+  /*helpボタン*/
+  .help-button{
+    margin: -15px 0 40px 0;
+    padding: 10;
+  }
+  .help-button #help{
+    padding: 10px;
+    background:  #8FDFDA;
+    border: none;
+    color: #595757;
+    width:50px;
+    height:30px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    user-select: none; /* CSS3 */
+    -moz-user-select: none; /* Firefox */
+    -webkit-user-select: none; /* Safari、Chromeなど */
+    -ms-user-select: none; /* IE10かららしい */
+  }
+
+  div.save-button{
+    float: left;
+  }
+
+  div.help-button{
+    float: left;
+  }
+
+  div.saisei{
+    float: left;
+  }
+
+  div.select{
+    float: left;
+  }
+  /*再生停止*/
+
+  .saisei{
+    margin: 0 0 40px 0;
+    padding: 10;
+
+  }
+
+  .saisei #saisei-button{
+    padding: 20px;
+    background: #CCCCCC;
+    border: none;
+    color: black;
+    width:75px;
+    height:65px;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #CCCCCC;
+    border-radius: 10px;
+    user-select: none; /* CSS3 */
+    -moz-user-select: none; /* Firefox */
+    -webkit-user-select: none; /* Safari、Chromeなど */
+    -ms-user-select: none; /* IE10かららしい */
+  }
+  li {
+    float: left;
+    border-right: 1px solid #bbbbbb;
+    width:75px;
+    height:60px;
+    text-align: center;
+  }
+  li a {
+    display: block;
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  </style>
+</head>
+
+
+<body>
+  <form oninput="result.value = add(bpm.value)">
+    <div>
+      <!--左-->
+      <div class="save-button">
+        <p id="save">save</p>
+      </div>
+
+      <div class="help-button">
+        <p id="help">help</p>
+      </div>
+
+      <!--真ん中-->
+      <div class="saisei">
+        <ul>
+          <li><p id ="<<"><<</p></li>
+          <li><p id =">>">>></p></li>
+          <li><p id ="▷">▷</p></li>
+          <li><p id ="□">□</p></li>
+          <li><p id ="<<□"><<□</p></li>
+        </ul>
+      </div>
+
+      <!--右-->
+      <div class="select">
+        <table cellpadding="0" cellspacing="1" align="right">
+          <tr>
+            <td class="bar"><font size="6" color="#59DE64">1</font>
+              <br><font size="3" color="white">bar</font></td>
+              <td><font size="6" color="#59DE64"><output name="result">120</font>
+                <br><font size="3" color="white">bpm</font></td>
+                <td><font size="6" color="#59DE64">0:00:000</font>
+                  <br><font size="3" color="white">time</font></td>
+                  <td><font size="6" color="#59DE64">C</font>
+                    <br><font size="3" color="white">key</font></td>
+                    <td class="artist"><font size="6" color="#59DE64">スピッツ</font>
+                      <br><font size="3" color="white">artist</font></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <!--bpm入力(仮)-->
+              <input  id ="numbpm" type="number" name="bpm">bpm
+            </form>
+
+
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
+            <script type="text/javascript" charset="utf-8">
+
+            const add = (x) => {
+              return (x) && parseInt(x);
+            }
+
+            /*再生ボタンと停止ボタン*/
+            var start = true;
+            document.getElementById("▷").onclick = function() {
+              if(start == true){
+                document.getElementById("▷").innerHTML = "□";
+                start = false;
+              }else{
+                document.getElementById("▷").innerHTML = "▷";
+                start = true;
+              }
+            };
+
+            /*helpボタン*/
+            var help = true;
+            document.getElementById("help").onclick = function() {
+              if(help == true){
+                document.getElementById("numbpm").style.backgroundColor = "#FFFF8A";
+                help = false;
+              }else{
+                document.getElementById("numbpm").style.backgroundColor = "white";
+                help = true
+              }
+            };
+
+            /*saveボタン*/
+
+
+          </script>
+        </body>
+        </html>
