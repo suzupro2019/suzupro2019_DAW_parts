@@ -1,0 +1,43 @@
+<audio id="aud" controls
+preload="metadata" onloadedmetadata="mDur()" ontimeupdate="mPlay()">　　
+	<source src="名もなき詩.m4a" type="audio/mpeg">　
+<!--
+controlsでaudioのプリセットを準備。
+onloadedmetadata="mDur()"でファイルの時間をdurのmaxに代入。
+ontimeupdate="mPlay()"で再生時間が動いたらdurのvalueに現在の時間を代入。
+-->
+</audio><br><br>
+<div id="filter">
+  <input id="dur" type="range" name="rng" min="0" step="0.25" value="0" onchange="mSet()" >
+</div>
+<style>
+#filter input[type=range]{
+	-webkit-appearance: none;
+	width: 1400px;
+}
+#filter input[type=range]::-webkit-slider-runnable-track{
+	height: 430px;
+  background: silver;
+}
+#filter input[type="range"]::-webkit-slider-thumb{
+	-webkit-appearance: none;
+	width: 8px;
+	height: 430px;
+	background: url("bar.png") no-repeat center left;
+}
+</style>
+<!--
+CSS,
+-webkit-slider-runnable-trackはスライダーの領域
+-webkit-slider-thumbはつまみの部分、画像でデザインを変更可能
+-->
+<script>
+var aud= document.getElementById('aud')
+var dur= document.getElementById('dur')
+function mDur(){dur.max= aud.duration}
+function mPlay(){dur.value=aud.currentTime}　　
+function mSet(){aud.currentTime=dur.value}　　　
+</script>
+<!--
+onchange="mSet()"でバーが動いた際に、バーの値を現在の再生時間に代入。
+-->
