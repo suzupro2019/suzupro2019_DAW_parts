@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>helpの切り替え</title>
+    <script type="text/javascript">
+
+		var changeArea1 = function (){
+			var flg = 1;
+			return function(){
+				if(flg === 1){
+					document.getElementById( "1" ).style.display = 'none';
+					document.getElementById( "2" ).style.display = 'block';
+					flg = 2;
+				}
+				else if(flg === 2){
+					document.getElementById( "1" ).style.display = 'block';
+					document.getElementById( "2" ).style.display = 'none';
+					flg = 1;
+				}
+			}
+		}();
+	</script>
+    <style>
+        body {
+            margin: 0;
+             padding: 0;
+              }
+        .css-fukidashi {
+            padding: 0;
+            margin: 0;
+            }
+        .text {
+            width: 200px;
+            position: relative;
+            margin:80px 50px 50px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            }
+            
+      .fukidashi {
+      display: none;
+      width: 200px;
+      position: absolute;
+      top: 0;
+      left: 250px;
+      padding: 16px;
+      border-radius: 5px;
+      background: #33cc99;
+      color: #fff;
+      font-weight: bold;
+    } 
+    .fukidashi:after {
+      position: absolute;
+      width: 0;
+      height: 0;
+      left: 0;
+      bottom: -19px;
+      margin-left: 10px;
+      border: solid transparent;
+      border-color: rgba(51, 204, 153, 0);
+      border-top-color: #33cc99;
+      border-width: 10px;
+      pointer-events: none;
+      content: " ";
+    }
+    .text:hover + .fukidashi {
+      display: block;
+    }
+    
+    .fukidashi2 {
+      display: none;
+      width: 100px;
+      position: absolute;
+      top: 145px;
+      left: 250px;
+      padding: 16px;
+      border-radius: 5px;
+      background: #33cc99;
+      color: #fff;
+      font-weight: bold;
+    }
+    .fukidashi2:after {
+      position: absolute;
+      width: 0;
+      height: 0;
+      left: 0;
+      bottom: -19px;
+      margin-left: 10px;
+      border: solid transparent;
+      border-color: rgba(51, 204, 153, 0);
+      border-top-color: #33cc99;
+      border-width: 10px;
+      pointer-events: none;
+      content: " ";
+    }
+    .text:hover + .fukidashi2 {
+      display: block;
+    }
+    </style>
+
+</head>
+
+
+<div id="1">
+  <p class="text">1+1= ?</p>
+  <p class="text">2-2= ?</p>
+</div>
+<div id="2" style="display: none;">
+  <p class="text">1+1= ?</p>
+  <p class="fukidashi">2</p>
+  <p class="text">2-2= ?</p>
+  <p class="fukidashi2">0</p>
+</div>
+
+<button onclick="changeArea1();">HELP</button>
+
+
+</html>
