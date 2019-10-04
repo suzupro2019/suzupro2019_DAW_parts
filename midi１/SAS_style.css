@@ -1,0 +1,60 @@
+.SAS_main{
+    margin-bottom: 30px;
+}
+
+h2{
+    text-align: center;
+}
+.img_scroll{
+    width: 800px;
+    height: 400px;
+    overflow: auto;
+    margin: 0 auto;
+}
+.test_img{
+    width: 2730px;
+    height: 1536px;
+}
+
+.SAS_grid{
+    display: flex;
+    
+    width: 800px;
+    height: 500px;
+    box-shadow: 1px 0 5px 1px #999;
+    overflow: auto;
+    margin: 0 auto;
+}
+.SAS_Mscale{
+    
+}
+.SAS_notes{
+    }
+.notes {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 50px;
+    height: 20px;
+    border: 1px solid rgba(20, 20, 20, 0.2); 
+}
+.notes.highlighted {
+    background-color:#999;
+}
+.Mscale_notes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkcyan;
+    
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 50px;
+    height: 20px;
+    border: 1px solid rgba(20, 20, 20, 0.8);
+}
+.Mscale_notes p{
+    color: white;
+    text-align: center;
+    margin: 0;
+}
+

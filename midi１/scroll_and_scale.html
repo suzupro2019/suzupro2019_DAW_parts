@@ -1,0 +1,135 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="./SAS_style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+            jQuery(function($){
+                //SAS_img_test
+                var img_width = 2730;
+                var img_height = 1536;
+                var isMouseDown = false;
+      $(".notes")
+        .mousedown(function () {
+          isMouseDown = true;
+          $(this).toggleClass(".notes.highlighted");
+          return false; // prevent text selection
+        })
+        .mouseover(function () {
+          if (isMouseDown) {
+            $(this).toggleClass(".notes.highlighted");
+          }
+        })
+        .bind("selectstart", function () {
+          return false; // prevent text selection in IE
+        });
+
+      $(document)
+        .mouseup(function () {
+          isMouseDown = false;
+        });
+                
+                $(".ls_scale_bar").on("input",function(){
+                    var img_resize_width = img_width * ($(".ls_scale_bar").val() / 50);
+                    $(".test_img").css("width", img_resize_width);
+                });
+                $(".pr_scale_bar").on("input",function(){
+                    var img_resize_height = img_height * ($(".pr_scale_bar").val() / 50);
+                    $(".test_img").css("height", img_resize_height);
+                });
+                
+                //SAS_grid_test
+                var MIDI_Mscale = 128; //音階数
+                var notes_measure = 16; //notesの列数
+                var Mscale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+                
+                $(".SAS_grid").append("<div class=\"SAS_Mscale\">");
+                for(var i = 0; i < MIDI_Mscale; i++){
+                    var Mscale_index = Math.floor((i-24) / 12); //国際式はi-12 ヤマハ式はi-24
+                    $(".SAS_Mscale").append("<div class=\"Mscale_notes\"><p>" + Mscale[i%12] + Mscale_index);
+                }
+                for(var j = 0; j < notes_measure; j++){
+                    $(".SAS_grid").append("<div class=\"SAS_notes\">");
+                    for(var k = 0; k < MIDI_Mscale; k++){
+                        $(".SAS_notes").eq(j).append("<div class=\"notes\">");
+                    }
+                }
+                
+                //notes縦横可変
+                var note_width = 50; //notesの最低幅
+                var note_height = 20; //notesの最低高さ
+                
+                $(".Mscale_notes").css({"width":note_width*2, "height":note_height*2});
+                $(".notes").css({"width":note_width*2, "height":note_height*2});
+
+                $(".width_scale_bar").on("input",function(){
+                    var note_resize_width = note_width * ($(".width_scale_bar").val() / 50);
+                    $(".Mscale_notes").css("width", note_resize_width);
+                    $(".notes").css("width", note_resize_width);
+                });
+                $(".height_scale_bar").on("input",function(){
+                    var note_resize_height = note_height * ($(".height_scale_bar").val() / 50);
+                    $(".Mscale_notes").css("height", note_resize_height);
+                    $(".notes").css("height", note_resize_height);
+                });
+            });
+            
+    $(function () {
+      var isMouseDown = false;
+      $(".notes")
+        .mousedown(function () {
+          isMouseDown = true;
+          $(this).toggleClass("highlighted");
+          return false; // prevent text selection
+        })
+        .mouseover(function () {
+          if (isMouseDown) {
+            $(this).toggleClass("highlighted");
+          }
+        })
+        .bind("selectstart", function () {
+          return false; // prevent text selection in IE
+        });
+
+      $(document)
+        .mouseup(function () {
+          isMouseDown = false;
+        });
+    });
+        </script>
+    </head>
+    <body>
+        <div class="SAS_main">
+            <div class="SAS_img">
+                <h2>Scroll and Scale test(img)</h2>
+                <div class="img_scroll">
+                    <img class="test_img" src="test_img.jpg">
+                </div>
+                <section class="scale_bar">
+                    <p>scale_bar</p>
+                    <div class="ls_scale">
+                        <label>ls_scale : <input type="range" class="ls_scale_bar"></label>
+                    </div>
+                    <div class="pr_scale">
+                        <label>pr_scale : <input type="range" class="pr_scale_bar"></label>
+                    </div>
+                </section>
+            </div>
+            <hr>
+            <h2>Scroll and Scale test(grid)</h2>
+            <div class="SAS_grid">
+           </div>          
+            
+             <section class="scale_bar">
+                    <p>scale_bar</p>
+                    <div class="width_scale">
+                        <label>width_scale : <input type="range" class="width_scale_bar" min="50" max="150"></label>
+                    </div>
+                    <div class="height_scale">
+                        <label>height_scale : <input type="range" class="height_scale_bar" min="50" max="150"></label>
+                    </div>
+                </section>
+                       </div>
+                       
+    </body>
+
+</html>
